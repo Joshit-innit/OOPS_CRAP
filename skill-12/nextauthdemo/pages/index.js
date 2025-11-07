@@ -1,4 +1,3 @@
-// pages/index.js
 import { useSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
 
@@ -21,20 +20,26 @@ export default function Home() {
       ) : (
         <>
           <p>
-            Signed in as <strong>{session.user?.name || session.user?.email}</strong>
+            <strong>Name:</strong> {session.user?.name || "No name available"}
           </p>
+          <p>
+            <strong>Email:</strong> {session.user?.email || "No email available"}
+          </p>
+
           {session.user?.image && (
             <img
               src={session.user.image}
-              alt="avatar"
+              alt="venky"
               width={80}
               height={80}
-              style={{ borderRadius: "50%" }}
+              style={{ borderRadius: "50%", marginTop: 10 }}
             />
           )}
+
           <div style={{ marginTop: 16 }}>
             <Link href="/dashboard">Go to Dashboard →</Link>
           </div>
+
           <div style={{ marginTop: 12 }}>
             <button onClick={() => signOut()} style={btnRed}>
               Sign out
@@ -54,4 +59,5 @@ const btnDark = {
   borderRadius: 6,
   cursor: "pointer",
 };
+
 const btnRed = { ...btnDark, background: "crimson" };
